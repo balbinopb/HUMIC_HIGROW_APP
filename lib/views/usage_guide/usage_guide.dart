@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:higrow/constants/app_colors.dart';
 
 class UsageGuide extends StatelessWidget {
   const UsageGuide({super.key});
@@ -7,7 +8,7 @@ class UsageGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(32.0),
@@ -20,7 +21,7 @@ class UsageGuide extends StatelessWidget {
                   child: Text(
                     "Usage Guide",
                     style: GoogleFonts.inter(
-                      color: Colors.orange,
+                      color: AppColors.orange,
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
                     ),

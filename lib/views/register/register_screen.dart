@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:higrow/constants/app_colors.dart';
 import 'package:higrow/controllers/register_controller.dart';
-import 'package:higrow/views/login/login_screen.dart';
+import 'package:higrow/routes/app_routes.dart';
 import 'package:higrow/widgets/input_field.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
@@ -33,7 +34,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   style: GoogleFonts.inter(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
-                    color: Colors.black,
+                    color: AppColors.black,
                   ),
                 ),
               ),
@@ -66,14 +67,10 @@ class RegisterScreen extends GetView<RegisterController> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                    );
+                    Get.toNamed(AppRoutes.login);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-
+                    backgroundColor: AppColors.orange,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(7),
                     ),
@@ -81,7 +78,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   child: Text(
                     "Create Account",
                     style: GoogleFonts.inter(
-                      color: Colors.white,
+                      color: AppColors.white,
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
@@ -104,15 +101,12 @@ class RegisterScreen extends GetView<RegisterController> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
+                      Get.toNamed(AppRoutes.login);
                     },
                     child: Text(
                       "Log In",
                       style: GoogleFonts.inter(
-                        color: Colors.orange,
+                        color: AppColors.orange,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                       ),
