@@ -6,6 +6,8 @@ import 'package:higrow/views/history/mock.dart';
 class HistoryController extends GetxController {
   final TextEditingController searchController = TextEditingController();
   var measurements = <Measurement>[].obs;
+  final searchQuery = ''.obs;
+  late Worker _debounceWorker;
 
   void filterMeasurements(String query) {
     measurements.value =
@@ -17,6 +19,24 @@ class HistoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    measurements.value = allMeasurements;
+    measurements.assignAll(allMeasurements);
+
+      // Debounce search query
+    _debounceWorker = debounce(searchQuery, (val) {
+      filterMeasurements(val);
+    }, time: 300.milliseconds);
+
+     // Connect the text controller to the obs
+    searchController.addListener(() {
+      searchQuery.value = searchController.text;
+    });
+
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    searchController.dispose();
+    _debounceWorker.dispose();
   }
 }

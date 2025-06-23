@@ -1,6 +1,7 @@
 
 class AppRoutes {
   static const login='/login';
-  static const regsiter='/register';
+  static const register='/register';
+  static const bottomNav='/bottomNav';
   static const history='/history';
 }

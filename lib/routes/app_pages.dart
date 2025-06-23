@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:higrow/bindings/bottom_nav_binding.dart';
 import 'package:higrow/bindings/history_binding.dart';
 import 'package:higrow/bindings/login_binding.dart';
 import 'package:higrow/bindings/register_binding.dart';
 import 'package:higrow/routes/app_routes.dart';
+import 'package:higrow/views/bottom/bottom_nav_screen.dart';
 import 'package:higrow/views/history/history_screen.dart';
 import 'package:higrow/views/login/login_screen.dart';
 import 'package:higrow/views/register/register_screen.dart';
@@ -13,12 +15,24 @@ class AppPages {
       name: AppRoutes.login,
       page: () => LoginScreen(),
       binding: LoginBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
     ),
 
     GetPage(
-      name: AppRoutes.regsiter,
+      name: AppRoutes.register,
       page: () => RegisterScreen(),
       binding: RegisterBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
+    ),
+
+    GetPage(
+      name: AppRoutes.bottomNav,
+      page: () => BottomNavScreen(),
+      binding: BottomNavBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 500),
     ),
 
     GetPage(
@@ -26,5 +40,6 @@ class AppPages {
       page: () => HistoryScreen(),
       binding: HistoryBinding(),
     ),
+    
   ];
 }
