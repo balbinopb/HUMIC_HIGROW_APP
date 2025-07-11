@@ -12,6 +12,7 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       body: Padding(
         padding: EdgeInsets.all(35),
         child: Column(
@@ -58,8 +59,8 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(AppRoutes.bottomNav);
+                onPressed: () async{
+                  await controller.login();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.orange,

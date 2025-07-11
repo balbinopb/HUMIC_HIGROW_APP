@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:higrow/bindings/bottom_nav_binding.dart';
+import 'package:higrow/bindings/cam_binding.dart';
 import 'package:higrow/bindings/history_binding.dart';
 import 'package:higrow/bindings/login_binding.dart';
 import 'package:higrow/bindings/register_binding.dart';
 import 'package:higrow/routes/app_routes.dart';
 import 'package:higrow/views/bottom/bottom_nav_screen.dart';
+import 'package:higrow/views/camera/camera_screen.dart';
 import 'package:higrow/views/history/history_screen.dart';
 import 'package:higrow/views/login/login_screen.dart';
 import 'package:higrow/views/register/register_screen.dart';
@@ -40,6 +42,11 @@ class AppPages {
       page: () => HistoryScreen(),
       binding: HistoryBinding(),
     ),
-    
+
+    GetPage(
+      name: AppRoutes.cam,
+      page: () => CameraScreen(),
+      binding: CamBinding(),
+    ),
   ];
 }

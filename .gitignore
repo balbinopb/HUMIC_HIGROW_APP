@@ -1,9 +1,4 @@
 # not fix yet
-lib/views/dashboard/
-lib/views/history/
-
-
-
 
 # Miscellaneous
 *.class

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:higrow/views/dashboard/dashboard_screen.dart';
+import 'package:higrow/views/bottom/bottom_nav_screen.dart';
 import 'package:higrow/views/login/login_screen.dart';
 
 void main() {
@@ -27,7 +27,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Should navigate to DashboardScreen
-    expect(find.byType(DashboardScreen), findsOneWidget);
+    expect(find.byType(BottomNavScreen), findsOneWidget);
   });
 
   testWidgets('LoginScreen Sign Up button is present', (WidgetTester tester) async {

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
+import 'package:higrow/controllers/cam_controller.dart';
 import 'package:higrow/controllers/dashboard_controller.dart';
 import 'package:higrow/views/bottom/list.dart';
+import 'package:higrow/views/camera/camera_screen.dart';
 import 'package:higrow/widgets/toggle.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -88,7 +90,8 @@ class DashboardScreen extends GetView<DashboardController> {
                   height: 50,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      //to camera
+                      Get.put(CamController());
+                      Get.to(() => CameraScreen());
                     },
                     icon: Icon(Icons.design_services, color: AppColors.white),
                     label: Text(
