@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
 import 'package:higrow/controllers/history_controller.dart';
-import 'package:higrow/widgets/measurement_title.dart';
+import 'package:higrow/widgets/measurement_tile.dart';
 
 class HistoryScreen extends GetView<HistoryController> {
   const HistoryScreen({super.key});
@@ -43,8 +43,8 @@ class HistoryScreen extends GetView<HistoryController> {
                     ),
                     SizedBox(height: 24),
                     TextField(
-                      controller: controller.searchController,
-                      onChanged: controller.filterMeasurements,
+                      // controller: controller,
+                      // onChanged: controller.filterMeasurements,
                       decoration: InputDecoration(
                         hintText: "Type for Measure project name",
                         hintStyle: GoogleFonts.inter(

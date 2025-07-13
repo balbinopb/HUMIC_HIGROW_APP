@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:higrow/constants/app_colors.dart';
+import 'package:higrow/controllers/auth_controller.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authController=Get.put(AuthController());
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -71,7 +74,39 @@ class ProfileScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.grey
               ),
-            )
+            ),
+            SizedBox(height: 40),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.yellow2,
+                  foregroundColor: AppColors.white,
+                ),
+                icon: Icon(Icons.logout),
+                label: Text("Logout"),
+                onPressed: () {
+                  Get.defaultDialog(
+                    title: "Logout",
+                    middleText: "Are you sure you want to logout?",
+                    confirm: ElevatedButton(
+                      onPressed: () {
+                        Get.back();
+                        authController.logout();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.yellow2,
+                        foregroundColor: AppColors.white,
+                      ),
+                      child: Text("Logout"),
+                    ),
+                    cancel: TextButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text("Cancel"),
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),

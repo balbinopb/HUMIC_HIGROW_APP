@@ -1,11 +1,9 @@
-
 import 'package:get/get.dart';
 import 'package:higrow/controllers/auth_controller.dart';
 
-class RegisterBinding extends Bindings {
+class GlobalBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthController>(()=> AuthController());
+    Get.lazyPut<AuthController>(()=>AuthController()); 
   }
-  
 }

@@ -1,42 +1,39 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:higrow/models/measure_model.dart';
-import 'package:higrow/views/history/mock.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HistoryController extends GetxController {
-  final TextEditingController searchController = TextEditingController();
-  var measurements = <Measurement>[].obs;
-  final searchQuery = ''.obs;
-  late Worker _debounceWorker;
+  final measurements = <Measurement>[].obs;
 
-  void filterMeasurements(String query) {
-    measurements.value =
-        allMeasurements
-            .where((m) => m.title.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-  }
+  final searchController = Rx<TextEditingController>(TextEditingController());
 
   @override
   void onInit() {
     super.onInit();
-    measurements.assignAll(allMeasurements);
-
-      // Debounce search query
-    _debounceWorker = debounce(searchQuery, (val) {
-      filterMeasurements(val);
-    }, time: 300.milliseconds);
-
-     // Connect the text controller to the obs
-    searchController.addListener(() {
-      searchQuery.value = searchController.text;
-    });
-
+    fetchMeasurements();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    searchController.dispose();
-    _debounceWorker.dispose();
+  Future<void> fetchMeasurements() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+
+    final uri = Uri.parse('http://10.110.0.145:3000/api/height');
+    try {
+      final res = await http.get(uri, headers: {
+        'Authorization': 'Bearer $token',
+      });
+
+      if (res.statusCode == 200) {
+        final List data = jsonDecode(res.body);
+        measurements.assignAll(data.map((e) => Measurement.fromJson(e)).toList());
+      } else {
+        Get.snackbar('Error', 'Failed to fetch measurements');
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Fetch failed: $e');
+    }
   }
 }
