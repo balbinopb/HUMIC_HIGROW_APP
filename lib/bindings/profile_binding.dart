@@ -6,7 +6,7 @@ import 'package:higrow/controllers/auth_controller.dart';
 class ProfileBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => ProfileController());
-    Get.lazyPut(() => AuthController());
+    Get.put(ProfileController());
+    Get.put(AuthController());
   }
 }

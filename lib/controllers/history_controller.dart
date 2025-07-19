@@ -1,14 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:higrow/models/measure_model.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:higrow/models/height_record.dart';
+import 'package:higrow/services/height_services.dart';
 
 class HistoryController extends GetxController {
-  final measurements = <Measurement>[].obs;
+  final measurements = <HeightRecord>[].obs;
+  final filteredMeasurements = <HeightRecord>[].obs;
+  final searchController = TextEditingController();
 
-  final searchController = Rx<TextEditingController>(TextEditingController());
+  final _service = HeightServices();
 
   @override
   void onInit() {
@@ -16,24 +16,20 @@ class HistoryController extends GetxController {
     fetchMeasurements();
   }
 
-  Future<void> fetchMeasurements() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('token');
-
-    final uri = Uri.parse('http://10.110.0.145:3000/api/height');
+  void fetchMeasurements() async {
     try {
-      final res = await http.get(uri, headers: {
-        'Authorization': 'Bearer $token',
-      });
-
-      if (res.statusCode == 200) {
-        final List data = jsonDecode(res.body);
-        measurements.assignAll(data.map((e) => Measurement.fromJson(e)).toList());
-      } else {
-        Get.snackbar('Error', 'Failed to fetch measurements');
-      }
+      final result = await _service.fetchRecords();
+      measurements.assignAll(result);
+      filteredMeasurements.assignAll(result);
     } catch (e) {
-      Get.snackbar('Error', 'Fetch failed: $e');
+      Get.snackbar("Error", "Failed to load measurements");
     }
+  }
+
+  void filterMeasurements(String keyword) {
+    final lowerKeyword = keyword.toLowerCase();
+    filteredMeasurements.value = measurements.where((record) {
+      return record.createdAt.toLowerCase().contains(lowerKeyword);
+    }).toList();
   }
 }

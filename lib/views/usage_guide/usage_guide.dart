@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
+import 'package:higrow/widgets/step_item.dart';
 
 class UsageGuide extends StatelessWidget {
   const UsageGuide({super.key});
@@ -10,37 +11,60 @@ class UsageGuide extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: EdgeInsets.all(32.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset("assets/images/logo.png", width: 61, height: 22),
-                Center(
-                  child: Text(
-                    "Usage Guide",
-                    style: GoogleFonts.inter(
-                      color: AppColors.orange,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset("assets/images/logo.png", width: 61, height: 22),
+              SizedBox(height: 16),
+              Center(
+                child: Text(
+                  "Panduan Penggunaan",
+                  style: GoogleFonts.inter(
+                    color: AppColors.orange,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                SizedBox(height: 16),
-                Text(
-                  """
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-              """,
-                  style: GoogleFonts.inter(fontSize: 14, height: 1.5),
-                  textAlign: TextAlign.justify,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(height: 32),
+
+              StepItem(
+                number: 1,
+                title: "Buka Aplikasi",
+                content:
+                    "Pastikan Anda telah mengunduh dan menginstal aplikasi HiGrow di perangkat Anda. Setelah itu, buka aplikasi untuk memulai.",
+              ),
+
+              StepItem(
+                number: 2,
+                title: "Akses Kamera",
+                content:
+                    "Izinkan aplikasi mengakses kamera agar bisa memindai tubuh pengguna. Pastikan pencahayaan cukup dan pengguna berdiri penuh dalam bingkai kamera.",
+              ),
+
+              StepItem(
+                number: 3,
+                title: "Lakukan Pengukuran",
+                content:
+                    "Ikuti petunjuk pada layar untuk mulai mengukur tinggi badan. Aplikasi akan menggunakan teknologi AI untuk memproses hasil pengukuran.",
+              ),
+
+              StepItem(
+                number: 4,
+                title: "Lihat Hasil",
+                content:
+                    "Setelah pengukuran selesai, hasil tinggi badan Anda akan ditampilkan dalam satuan sentimeter dengan dua angka di belakang koma.",
+              ),
+
+              StepItem(
+                number: 5,
+                title: "Riwayat Pengukuran",
+                content:
+                    "Anda dapat melihat riwayat pengukuran di halaman Riwayat untuk melacak perkembangan tinggi badan dari waktu ke waktu.",
+              ),
+            ],
           ),
         ),
       ),

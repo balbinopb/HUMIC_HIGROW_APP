@@ -1,34 +1,34 @@
 import 'package:get/get.dart';
-import 'package:higrow/models/user_model.dart';
-import '../services/auth_services.dart';
+import 'package:higrow/services/auth_services.dart';
 
 class ProfileController extends GetxController {
-  final _authService = AuthServices();
+  final AuthServices _authServices = AuthServices();
+  final RxMap<String, dynamic> userProfile = <String, dynamic>{}.obs;
 
-  var user = Rxn<User>();
-  var isLoading = true.obs;
+  String get username {
+    final email = userProfile['email'] ?? '';
+    final name = email.contains('@') ? email.split('@')[0] : '';
+    return name.isNotEmpty ? name[0].toUpperCase() + name.substring(1) : '';
+  }
+
+  String get email {
+    final email = userProfile['email'] ?? '';
+    return email;
+  }
 
   @override
   void onInit() {
     super.onInit();
-    loadUser();
+    loadProfile();
   }
 
-  Future<void> loadUser() async {
-    try {
-      isLoading.value = true;
-
-      final data = await _authService.getSavedUser();
-      if (data != null) {
-        user.value = User.fromJson(data);
-        print("[DEBUG] Loaded user: ${user.value!.username}");
-      } else {
-        print("No user data found in storage");
+  Future<void> loadProfile() async {
+    final token = await _authServices.getToken();
+    if (token != null) {
+      final profile = await _authServices.getProfile(token);
+      if (profile != null) {
+        userProfile.value = profile;
       }
-    } catch (e) {
-      print("Error loading user: $e");
-    } finally {
-      isLoading.value = false;
     }
   }
 }

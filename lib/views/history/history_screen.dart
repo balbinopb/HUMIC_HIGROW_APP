@@ -43,8 +43,8 @@ class HistoryScreen extends GetView<HistoryController> {
                     ),
                     SizedBox(height: 24),
                     TextField(
-                      // controller: controller,
-                      // onChanged: controller.filterMeasurements,
+                      controller: controller.searchController,
+                      onChanged: controller.filterMeasurements,
                       decoration: InputDecoration(
                         hintText: "Type for Measure project name",
                         hintStyle: GoogleFonts.inter(
@@ -88,10 +88,10 @@ class HistoryScreen extends GetView<HistoryController> {
                 ),
               ),
 
-              //Measurement List
+              // Measurement List
               Expanded(
                 child: Obx(() {
-                  if (controller.measurements.isEmpty) {
+                  if (controller.filteredMeasurements.isEmpty) {
                     return Center(
                       child: Text(
                         "No measurements found.",
@@ -105,11 +105,11 @@ class HistoryScreen extends GetView<HistoryController> {
 
                   return ListView.separated(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    itemCount: controller.measurements.length,
+                    itemCount: controller.filteredMeasurements.length,
                     separatorBuilder: (_, __) => SizedBox(height: 12),
                     itemBuilder: (context, index) {
                       return MeasurementTile(
-                        measurement: controller.measurements[index],
+                        measurement: controller.filteredMeasurements[index],
                       );
                     },
                   );

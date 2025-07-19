@@ -32,7 +32,7 @@ class AppPages {
     ),
 
     GetPage(
-      name: AppRoutes.bottomNav,
+      name: AppRoutes.dashboard,
       page: () => BottomNavScreen(),
       binding: BottomNavBinding(),
       transition: Transition.fadeIn,

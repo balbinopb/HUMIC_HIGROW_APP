@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
-import 'package:higrow/controllers/auth_controller.dart';
+import 'package:higrow/controllers/profile_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authController=Get.put(AuthController());
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -64,49 +64,61 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 50,),
-            Text('Muthia Rihadatul Aisyi'),
-            Text('mutik@gimail.kom'),
-            SizedBox(height: 40,),
-            Container(
-              width: 310,
-              height: 38,
-              decoration: BoxDecoration(
-                color: AppColors.grey
+            SizedBox(height: 50),
+            Text(
+              controller.username,
+              style: GoogleFonts.inter(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              controller.email,
+              style: GoogleFonts.inter(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: 40),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.yellow2,
-                  foregroundColor: AppColors.white,
-                ),
-                icon: Icon(Icons.logout),
-                label: Text("Logout"),
-                onPressed: () {
-                  Get.defaultDialog(
-                    title: "Logout",
-                    middleText: "Are you sure you want to logout?",
-                    confirm: ElevatedButton(
-                      onPressed: () {
-                        Get.back();
-                        authController.logout();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.yellow2,
-                        foregroundColor: AppColors.white,
-                      ),
-                      child: Text("Logout"),
-                    ),
-                    cancel: TextButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text("Cancel"),
-                    ),
-                  );
-                },
-              ),
+            Container(
+              width: 310,
+              height: 38,
+              decoration: BoxDecoration(color: AppColors.grey),
+            ),
+            SizedBox(height: 40),
+            // ElevatedButton.icon(
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: AppColors.yellow2,
+            //     foregroundColor: AppColors.white,
+            //   ),
+            //   icon: Icon(Icons.logout),
+            //   label: Text("Logout"),
+            //   onPressed: () {
+            //     Get.defaultDialog(
+            //       title: "Logout",
+            //       middleText: "Are you sure you want to logout?",
+            //       confirm: ElevatedButton(
+            //         onPressed: () {
+            //           Get.back();
+            //           authController.logout();
+            //         },
+            //         style: ElevatedButton.styleFrom(
+            //           backgroundColor: AppColors.yellow2,
+            //           foregroundColor: AppColors.white,
+            //         ),
+            //         child: Text("Logout"),
+            //       ),
+            //       cancel: TextButton(
+            //         onPressed: () {
+            //           Get.back();
+            //         },
+            //         child: Text("Cancel"),
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

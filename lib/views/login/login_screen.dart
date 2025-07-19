@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
-import 'package:higrow/controllers/login_controller.dart';
+import 'package:higrow/controllers/auth_controller.dart';
 import 'package:higrow/routes/app_routes.dart';
 import 'package:higrow/widgets/input_field.dart';
 
-class LoginScreen extends GetView<LoginController> {
+class LoginScreen extends GetView<AuthController> {
   const LoginScreen({super.key});
 
   @override
@@ -24,7 +24,7 @@ class LoginScreen extends GetView<LoginController> {
               child: Image.asset("assets/images/logo.png"),
             ),
             SizedBox(height: 60),
-    
+
             // TITLE
             Align(
               alignment: Alignment.centerLeft,
@@ -38,32 +38,32 @@ class LoginScreen extends GetView<LoginController> {
               ),
             ),
             SizedBox(height: 20),
-    
+
             // USERNAME
             InputField(
-              hintText: 'Username',
-              controller: controller.usernameController,
+              hintText: 'Email',
+              controller: controller.emailController,
             ),
             SizedBox(height: 16),
-    
+
             // PASSWORD
             InputField(
               hintText: 'Password',
-              controller: controller.pwController,
+              controller: controller.passwordController,
               obscureText: controller.isObscure.value,
             ),
             SizedBox(height: 50),
-    
+
             // BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.toNamed(AppRoutes.bottomNav);
+                  controller.login();
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.orange,
-    
+
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(7),
                   ),
@@ -79,7 +79,7 @@ class LoginScreen extends GetView<LoginController> {
               ),
             ),
             SizedBox(height: 35),
-    
+
             // DONT HAVE AN ACCOUNT SIGN UP
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

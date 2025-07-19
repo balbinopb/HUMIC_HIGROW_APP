@@ -25,7 +25,7 @@ class BottomNavScreen extends GetView<BottomNavController> {
             onTap: (idx) => controller.selectedIndex.value = idx,
             selectedItemColor: AppColors.white,
             unselectedItemColor: AppColors.black,
-            items: const [
+            items:  [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
               BottomNavigationBarItem(
                 icon: Icon(Icons.straighten),
