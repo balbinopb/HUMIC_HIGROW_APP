@@ -1,42 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:higrow/models/measure_model.dart';
-import 'package:higrow/views/history/mock.dart';
+import 'package:higrow/models/height_record.dart';
+import 'package:higrow/services/height_services.dart';
 
 class HistoryController extends GetxController {
-  final TextEditingController searchController = TextEditingController();
-  var measurements = <Measurement>[].obs;
-  final searchQuery = ''.obs;
-  late Worker _debounceWorker;
+  final measurements = <HeightRecord>[].obs;
+  final filteredMeasurements = <HeightRecord>[].obs;
+  final searchController = TextEditingController();
 
-  void filterMeasurements(String query) {
-    measurements.value =
-        allMeasurements
-            .where((m) => m.title.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-  }
+  final _service = HeightServices();
 
   @override
   void onInit() {
     super.onInit();
-    measurements.assignAll(allMeasurements);
-
-      // Debounce search query
-    _debounceWorker = debounce(searchQuery, (val) {
-      filterMeasurements(val);
-    }, time: 300.milliseconds);
-
-     // Connect the text controller to the obs
-    searchController.addListener(() {
-      searchQuery.value = searchController.text;
-    });
-
+    fetchMeasurements();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    searchController.dispose();
-    _debounceWorker.dispose();
+  void fetchMeasurements() async {
+    try {
+      final result = await _service.fetchRecords();
+      measurements.assignAll(result);
+      filteredMeasurements.assignAll(result);
+    } catch (e) {
+      Get.snackbar("Error", "Failed to load measurements");
+    }
+  }
+
+  void filterMeasurements(String keyword) {
+    final lowerKeyword = keyword.toLowerCase();
+    filteredMeasurements.value = measurements.where((record) {
+      return record.createdAt.toLowerCase().contains(lowerKeyword);
+    }).toList();
   }
 }

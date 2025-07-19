@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
-import 'package:higrow/controllers/dashboard_controller.dart';
-import 'package:higrow/views/bottom/list.dart';
-import 'package:higrow/widgets/toggle.dart';
+import 'package:higrow/controllers/history_controller.dart';
+import 'package:higrow/routes/app_routes.dart';
+import 'package:higrow/widgets/measurement_tile.dart';
 
-class DashboardScreen extends GetView<DashboardController> {
+class DashboardScreen extends GetView<HistoryController> {
   const DashboardScreen({super.key});
 
   @override
@@ -41,12 +41,12 @@ class DashboardScreen extends GetView<DashboardController> {
                       height: 21,
                       width: 61,
                     ),
-                    Obx(
-                      () => Toggle(
-                        isEnglish: controller.isEnglish.value,
-                        onChanged: (_) => controller.toggle(),
-                      ),
-                    ),
+                    // Obx(
+                    //   () => Toggle(
+                    //     isEnglish: controller.isEnglish.value,
+                    //     onChanged: (_) => controller.toggle(),
+                    //   ),
+                    // ),
                   ],
                 ),
 
@@ -89,6 +89,7 @@ class DashboardScreen extends GetView<DashboardController> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       //to camera
+                      Get.toNamed(AppRoutes.cam);
                     },
                     icon: Icon(Icons.design_services, color: AppColors.white),
                     label: Text(
@@ -118,7 +119,24 @@ class DashboardScreen extends GetView<DashboardController> {
                   ),
                 ),
                 SizedBox(height: 22),
-                ListItems(),
+                // ListItems(),//how i can show 5 last record in this
+                Obx(
+                  () => ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    itemCount:
+                        controller.filteredMeasurements.length > 5
+                            ? 5
+                            : controller.filteredMeasurements.length,
+                    separatorBuilder: (_, __) => SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      return MeasurementTile(
+                        measurement: controller.filteredMeasurements[index],
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

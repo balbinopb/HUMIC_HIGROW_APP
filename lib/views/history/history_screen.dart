@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
 import 'package:higrow/controllers/history_controller.dart';
-import 'package:higrow/widgets/measurement_title.dart';
+import 'package:higrow/widgets/measurement_tile.dart';
 
 class HistoryScreen extends GetView<HistoryController> {
   const HistoryScreen({super.key});
@@ -88,10 +88,10 @@ class HistoryScreen extends GetView<HistoryController> {
                 ),
               ),
 
-              //Measurement List
+              // Measurement List
               Expanded(
                 child: Obx(() {
-                  if (controller.measurements.isEmpty) {
+                  if (controller.filteredMeasurements.isEmpty) {
                     return Center(
                       child: Text(
                         "No measurements found.",
@@ -105,11 +105,11 @@ class HistoryScreen extends GetView<HistoryController> {
 
                   return ListView.separated(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    itemCount: controller.measurements.length,
+                    itemCount: controller.filteredMeasurements.length,
                     separatorBuilder: (_, __) => SizedBox(height: 12),
                     itemBuilder: (context, index) {
                       return MeasurementTile(
-                        measurement: controller.measurements[index],
+                        measurement: controller.filteredMeasurements[index],
                       );
                     },
                   );

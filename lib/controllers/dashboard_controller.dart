@@ -1,12 +1,11 @@
+// import 'package:get/get.dart';
+// import 'package:higrow/models/height_record.dart';
 
+// class DashboardController extends GetxController {
+//   var isEnglish = true.obs;
+//   final measurements = <HeightRecord>[].obs;
 
-import 'package:get/get.dart';
-
-class DashboardController extends GetxController{
-  var isEnglish=true.obs;
-
-  void toggle(){
-    isEnglish.value = !isEnglish.value;
-  }
-
-}
+//   void toggle() {
+//     isEnglish.value = !isEnglish.value;
+//   }
+// }
