@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:higrow/models/height_record.dart';
 import 'package:higrow/services/height_services.dart';
+import 'package:intl/intl.dart';
 
 class HistoryController extends GetxController {
   final measurements = <HeightRecord>[].obs;
@@ -22,14 +23,25 @@ class HistoryController extends GetxController {
       measurements.assignAll(result);
       filteredMeasurements.assignAll(result);
     } catch (e) {
-      Get.snackbar("Error", "Failed to load measurements");
+      // Get.snackbar("Error", "Failed to load measurements");
+      return;
     }
   }
 
+  // void filterMeasurements(String keyword) {
+  //   final lowerKeyword = keyword.toLowerCase();
+  //   filteredMeasurements.value = measurements.where((record) {
+  //     return record.createdAt.toLowerCase().contains(lowerKeyword);
+  //   }).toList();
+  // }
   void filterMeasurements(String keyword) {
     final lowerKeyword = keyword.toLowerCase();
-    filteredMeasurements.value = measurements.where((record) {
-      return record.createdAt.toLowerCase().contains(lowerKeyword);
-    }).toList();
+    final dayFormat = DateFormat('dd');
+
+    filteredMeasurements.value =
+        measurements.where((record) {
+          final dayString = dayFormat.format(DateTime.parse(record.createdAt));
+          return dayString.contains(lowerKeyword);
+        }).toList();
   }
 }

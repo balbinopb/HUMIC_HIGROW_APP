@@ -46,13 +46,13 @@ class HistoryScreen extends GetView<HistoryController> {
                       controller: controller.searchController,
                       onChanged: controller.filterMeasurements,
                       decoration: InputDecoration(
-                        hintText: "Type for Measure project name",
+                        hintText: "Search by day (e.g. 01, 15, 20)",
                         hintStyle: GoogleFonts.inter(
                           color: Colors.orange.shade700,
                           fontWeight: FontWeight.w500,
                         ),
                         filled: true,
-                        fillColor: AppColors.white,
+                        fillColor: Colors.transparent,
                         suffixIcon: Icon(Icons.search, color: AppColors.black),
                         contentPadding: EdgeInsets.symmetric(
                           horizontal: 16,

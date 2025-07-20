@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:higrow/constants/app_colors.dart';
 import 'package:higrow/models/height_record.dart';
 import 'package:intl/intl.dart';
 
@@ -23,16 +24,9 @@ class MeasurementTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         border: Border.all(color: Colors.orange.shade200),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.orange.shade100,
-            blurRadius: 6,
-            offset: Offset(0, 3),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -47,7 +41,7 @@ class MeasurementTile extends StatelessWidget {
               ),
             )
           else
-            Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
+            Icon(Icons.image_not_supported, size: 64, color: AppColors.grey),
 
           SizedBox(width: 16),
 

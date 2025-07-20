@@ -9,6 +9,8 @@ class AuthController extends GetxController {
   var isLoading = false.obs;
   var isLoggedIn = false.obs;
   var isObscure = true.obs;
+  var emailError = RxnString();
+  var passwordError = RxnString();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -17,6 +19,15 @@ class AuthController extends GetxController {
   void onInit() {
     super.onInit();
     checkLoginStatus();
+    emailController.addListener(() => emailError.value = null);
+    passwordController.addListener(() => passwordError.value = null);
+  }
+
+  void validateFormFields() {
+    emailError.value =
+        emailController.text.trim().isEmpty ? 'Email is required' : null;
+    passwordError.value =
+        passwordController.text.trim().isEmpty ? 'Password is required' : null;
   }
 
   void checkLoginStatus() async {
@@ -27,8 +38,12 @@ class AuthController extends GetxController {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
+    emailError.value = null;
+    passwordError.value = null;
+
+    validateFormFields();
+
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar('Error', 'Email and password are required');
       return;
     }
 
@@ -39,8 +54,9 @@ class AuthController extends GetxController {
     if (success) {
       isLoggedIn.value = true;
       Get.offAllNamed(AppRoutes.dashboard);
+      clearFields();
     } else {
-      Get.snackbar('Login Failed', 'Invalid email or password');
+      passwordError.value = 'Invalid email or password';
     }
   }
 
@@ -48,8 +64,12 @@ class AuthController extends GetxController {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
+    emailError.value = null;
+    passwordError.value = null;
+
+    validateFormFields();
+
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar('Error', 'Email and password are required');
       return;
     }
     isLoading.value = true;
@@ -59,15 +79,17 @@ class AuthController extends GetxController {
     if (success) {
       isLoggedIn.value = true;
       Get.offAllNamed(AppRoutes.dashboard);
+      clearFields();
     } else {
-      Get.snackbar('Register Failed', 'Email may already be registered');
+      emailError.value = 'Email may already be registered';
     }
   }
 
   Future<void> logout() async {
     await _authService.logout();
     isLoggedIn.value = false;
-    clearFields();
+
+    await Future.delayed(Duration(milliseconds: 100));
     Get.offAllNamed(AppRoutes.login);
   }
 
@@ -78,8 +100,8 @@ class AuthController extends GetxController {
 
   @override
   void onClose() {
+    super.onClose();
     emailController.dispose();
     passwordController.dispose();
-    super.onClose();
   }
 }

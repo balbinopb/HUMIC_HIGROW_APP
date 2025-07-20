@@ -17,13 +17,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   animated_toggle_switch: ^0.8.5
-  mockito: ^5.4.6
   get: ^4.7.2
   camera: ^0.11.2
-  flutter_secure_storage: ^9.2.4
   shared_preferences: ^2.5.3
   http: ^1.4.0
   intl: ^0.20.2
+  mockito: ^5.4.6
 
 dev_dependencies:
   flutter_test:
