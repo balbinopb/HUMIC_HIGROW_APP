@@ -17,14 +17,14 @@ class AppPages {
       name: AppRoutes.login,
       page: () => LoginScreen(),
       transition: Transition.fadeIn,
-      transitionDuration: Duration(milliseconds: 500),
+      transitionDuration: Duration(milliseconds: 400),
     ),
 
     GetPage(
       name: AppRoutes.register,
       page: () => RegisterScreen(),
       transition: Transition.fadeIn,
-      transitionDuration: Duration(milliseconds: 500),
+      transitionDuration: Duration(milliseconds: 400),
     ),
 
     GetPage(
@@ -32,24 +32,29 @@ class AppPages {
       page: () => BottomNavScreen(),
       binding: BottomNavBinding(),
       transition: Transition.fadeIn,
-      transitionDuration: Duration(milliseconds: 500),
+      transitionDuration: Duration(milliseconds: 400),
     ),
 
     GetPage(
       name: AppRoutes.history,
       page: () => HistoryScreen(),
       binding: HistoryBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
     ),
     GetPage(
       name: AppRoutes.cam,
       page: () => CameraScreen(),
       binding: CamBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
     ),
     GetPage(
       name: AppRoutes.profile,
       page: () => ProfileScreen(),
       binding: ProfileBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: Duration(milliseconds: 300),
     ),
-    
   ];
 }
