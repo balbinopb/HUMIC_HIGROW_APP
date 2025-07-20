@@ -52,13 +52,9 @@ class CameraScreen extends GetView<CamController> {
               // Capture and Predict Button
               ElevatedButton.icon(
                 onPressed: () {
-                  print(
-                    "========================================1=================================================",
-                  );
+                  // print("========================================1=================================================");
                   controller.captureAndPredict();
-                  print(
-                    "========================================2=================================================",
-                  );
+                  // print("========================================2=================================================");
                 },
                 label: Text('Capture & Predict Height'),
                 style: ElevatedButton.styleFrom(

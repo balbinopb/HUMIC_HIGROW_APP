@@ -6,17 +6,13 @@ class AuthServices {
   final String baseUrl = 'http://10.110.0.9:3000/api/auth';
   // Register user
   Future<bool> register(String email, String password) async {
-    print(
-      "[DEBUG]========================================2=================================================",
-    );
+    // print("[DEBUG]========================================2=================================================",);
     final response = await http.post(
       Uri.parse('$baseUrl/register'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'email': email, 'password': password}),
     );
-    print(
-      "[DEBUG]========================================3=================================================",
-    );
+    // print("[DEBUG]========================================3=================================================",);
 
     if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
@@ -24,7 +20,7 @@ class AuthServices {
       await prefs.setString('token', data['token']);
       return true;
     } else {
-      print('Register failed: ${response.body}');
+      // print('Register failed: ${response.body}');
       return false;
     }
   }

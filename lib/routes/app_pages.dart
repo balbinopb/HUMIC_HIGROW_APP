@@ -2,9 +2,7 @@ import 'package:get/get.dart';
 import 'package:higrow/bindings/bottom_nav_binding.dart';
 import 'package:higrow/bindings/cam_binding.dart';
 import 'package:higrow/bindings/history_binding.dart';
-import 'package:higrow/bindings/login_binding.dart';
 import 'package:higrow/bindings/profile_binding.dart';
-import 'package:higrow/bindings/register_binding.dart';
 import 'package:higrow/routes/app_routes.dart';
 import 'package:higrow/views/bottom/bottom_nav_screen.dart';
 import 'package:higrow/views/camera/camera_screen.dart';
@@ -18,7 +16,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      binding: LoginBinding(),
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 500),
     ),
@@ -26,7 +23,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.register,
       page: () => RegisterScreen(),
-      binding: RegisterBinding(),
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 500),
     ),

@@ -32,7 +32,7 @@ class StepItem extends StatelessWidget {
               child: Text(
                 number.toString(),
                 style: GoogleFonts.inter(
-                  color: Colors.white,
+                  color: AppColors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
@@ -48,7 +48,7 @@ class StepItem extends StatelessWidget {
                   title,
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: AppColors.black,
                     fontSize: 16,
                   ),
                 ),

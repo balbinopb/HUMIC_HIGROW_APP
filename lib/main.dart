@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:higrow/bindings/initial_binding.dart';
 import 'package:higrow/routes/app_pages.dart';
 import 'package:higrow/routes/app_routes.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: AppRoutes.login,
       getPages: AppPages.routes,
+      initialBinding: InitialBinding(),
     );
   }
 }

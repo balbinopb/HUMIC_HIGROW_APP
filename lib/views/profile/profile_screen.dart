@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
+import 'package:higrow/controllers/auth_controller.dart';
 import 'package:higrow/controllers/profile_controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
-  const ProfileScreen({super.key});
+  final _authController = Get.find<AuthController>();
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,37 +90,49 @@ class ProfileScreen extends GetView<ProfileController> {
               decoration: BoxDecoration(color: AppColors.grey),
             ),
             SizedBox(height: 40),
-            // ElevatedButton.icon(
-            //   style: ElevatedButton.styleFrom(
-            //     backgroundColor: AppColors.yellow2,
-            //     foregroundColor: AppColors.white,
-            //   ),
-            //   icon: Icon(Icons.logout),
-            //   label: Text("Logout"),
-            //   onPressed: () {
-            //     Get.defaultDialog(
-            //       title: "Logout",
-            //       middleText: "Are you sure you want to logout?",
-            //       confirm: ElevatedButton(
-            //         onPressed: () {
-            //           Get.back();
-            //           authController.logout();
-            //         },
-            //         style: ElevatedButton.styleFrom(
-            //           backgroundColor: AppColors.yellow2,
-            //           foregroundColor: AppColors.white,
-            //         ),
-            //         child: Text("Logout"),
-            //       ),
-            //       cancel: TextButton(
-            //         onPressed: () {
-            //           Get.back();
-            //         },
-            //         child: Text("Cancel"),
-            //       ),
-            //     );
-            //   },
-            // ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.yellow2,
+                foregroundColor: AppColors.white,
+              ),
+              icon: Icon(Icons.logout),
+              label: Text("Logout"),
+              onPressed: () async {
+                final confirmed = await Get.dialog<bool>(
+                  AlertDialog(
+                    // backgroundColor: Colors.yellow.shade600,
+                    title: Text(
+                      'Confirm Logout',
+                      style: TextStyle(color: AppColors.black),
+                    ),
+                    content: Text(
+                      'Are you sure you want to log out?',
+                      style: TextStyle(color: AppColors.black),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Get.back(result: false),
+                        child: Text(
+                          'No',
+                          style: TextStyle(color: AppColors.black),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () => Get.back(result: true),
+                        child: Text(
+                          'Yes',
+                          style: TextStyle(color: AppColors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+
+                if (confirmed == true) {
+                  await _authController.logout();
+                }
+              },
+            ),
           ],
         ),
       ),

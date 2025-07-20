@@ -53,6 +53,7 @@ class RegisterScreen extends GetView<AuthController> {
                     InputField(
                       hintText: 'Email',
                       controller: controller.emailController,
+                      errorText: controller.emailError.value,
                     ),
                     SizedBox(height: 16),
 
@@ -62,6 +63,7 @@ class RegisterScreen extends GetView<AuthController> {
                         hintText: 'Password',
                         obscureText: controller.isObscure.value,
                         controller: controller.passwordController,
+                        errorText: controller.passwordError.value,
                       ),
                     ),
                     SizedBox(height: 20),
@@ -71,13 +73,9 @@ class RegisterScreen extends GetView<AuthController> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          print(
-                            "[DEBUG]========================================BEFORE REGISTER=================================================",
-                          );
+                          // print("[DEBUG]========================================BEFORE REGISTER=================================================");
                           controller.register();
-                          print(
-                            "[DEBUG]========================================AFTER REGISTER=================================================",
-                          );
+                          // print("[DEBUG]========================================AFTER REGISTER=================================================");
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.orange,
@@ -112,6 +110,7 @@ class RegisterScreen extends GetView<AuthController> {
                         TextButton(
                           onPressed: () {
                             Get.toNamed(AppRoutes.login);
+                            controller.clearFields();
                           },
                           child: Text(
                             "Log In",

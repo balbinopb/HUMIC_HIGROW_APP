@@ -15,7 +15,7 @@ class HeightRecord {
     return HeightRecord(
       id: json['id'].toString(),
       photoBase64: json['photo_base64'],
-      height: json['height_cm']?.toString(),
+      height: json['predicted_height_cm']?.toString(),
       createdAt: json['created_at'],
     );
   }

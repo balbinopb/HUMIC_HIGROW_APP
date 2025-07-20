@@ -21,7 +21,7 @@ class CamController extends GetxController {
     try {
       cameras.value = await availableCameras();
       if (cameras.isEmpty) {
-        Get.snackbar('Camera Error', 'No cameras available');
+        // Get.snackbar('Camera Error', 'No cameras available');
         return;
       }
 
@@ -34,7 +34,8 @@ class CamController extends GetxController {
       await cameraController.initialize();
       isInitialized.value = true;
     } catch (e) {
-      Get.snackbar('Camera Error', 'Failed to initialize: $e');
+      // Get.snackbar('Camera Error', 'Failed to initialize: $e');
+      return;
     }
   }
 
