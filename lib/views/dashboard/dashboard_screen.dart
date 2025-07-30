@@ -119,7 +119,6 @@ class DashboardScreen extends GetView<HistoryController> {
                   ),
                 ),
                 SizedBox(height: 22),
-                // ListItems(),//how i can show 5 last record in this
                 Obx(
                   () => ListView.separated(
                     shrinkWrap: true,
