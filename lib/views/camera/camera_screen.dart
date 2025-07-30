@@ -13,7 +13,7 @@ class CameraScreen extends GetView<CamController> {
       appBar: AppBar(
         title: Text('Camera', style: TextStyle(color: AppColors.white)),
         centerTitle: true,
-        backgroundColor: AppColors.orange,
+        backgroundColor: AppColors.yellow2,
         iconTheme: IconThemeData(color: AppColors.white),
       ),
       body: Obx(() {
@@ -58,8 +58,8 @@ class CameraScreen extends GetView<CamController> {
                 },
                 label: Text('Capture & Predict Height'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.orange,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.yellow2,
+                  foregroundColor: AppColors.white,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   textStyle: TextStyle(fontSize: 16),
                   shape: RoundedRectangleBorder(
