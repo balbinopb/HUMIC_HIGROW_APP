@@ -91,6 +91,18 @@ class HistoryScreen extends GetView<HistoryController> {
               // Measurement List
               Expanded(
                 child: Obx(() {
+
+                  if (controller.isLoading.value) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: CircularProgressIndicator(
+                          color: Color(0xFFF1772F),
+                        ),
+                      ),
+                    );
+                  }
+                  
                   if (controller.filteredMeasurements.isEmpty) {
                     return Center(
                       child: Text(

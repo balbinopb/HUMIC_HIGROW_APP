@@ -54,6 +54,7 @@ class CamController extends GetxController {
           'Height: $result',
           duration: const Duration(seconds: 4),
         );
+        Get.back(result: true);
       }
     } catch (e) {
       return;

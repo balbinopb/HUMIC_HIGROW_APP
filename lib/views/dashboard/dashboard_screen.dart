@@ -87,9 +87,13 @@ class DashboardScreen extends GetView<HistoryController> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
-                    onPressed: () {
+                    onPressed: () async {
                       //to camera
-                      Get.toNamed(AppRoutes.cam);
+                      // Get.toNamed(AppRoutes.cam);
+                      final result = await Get.toNamed(AppRoutes.cam);
+                      if (result == true) {
+                        controller.fetchMeasurements();
+                      }
                     },
                     icon: Icon(Icons.design_services, color: AppColors.white),
                     label: Text(
@@ -119,23 +123,41 @@ class DashboardScreen extends GetView<HistoryController> {
                   ),
                 ),
                 SizedBox(height: 22),
-                Obx(
-                  () => ListView.separated(
+                Obx(() {
+                  if (controller.isLoading.value) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: CircularProgressIndicator(
+                          color: Color(0xFFF1772F),
+                        ),
+                      ),
+                    );
+                  }
+
+                  final validMeasurements =
+                      controller.filteredMeasurements
+                          .where(
+                            (m) => m.height != null && m.photoBase64 != null,
+                          )
+                          .toList();
+                  // print('Filtered measurements: $validMeasurements');
+                  return ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.symmetric(horizontal: 0),
                     itemCount:
-                        controller.filteredMeasurements.length > 5
+                        validMeasurements.length > 5
                             ? 5
-                            : controller.filteredMeasurements.length,
+                            : validMeasurements.length,
                     separatorBuilder: (_, __) => SizedBox(height: 12),
                     itemBuilder: (context, index) {
                       return MeasurementTile(
-                        measurement: controller.filteredMeasurements[index],
+                        measurement: validMeasurements[index],
                       );
                     },
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),

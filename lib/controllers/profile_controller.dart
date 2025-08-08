@@ -7,7 +7,7 @@ class ProfileController extends GetxController {
 
   String get username {
     final email = userProfile['email'] ?? '';
-    final name = email.contains('@') ? email.split('@')[0] : '';
+    final name = email.contains('@') ? email.split('@')[0] : '';//pior @mgail.com
     return name.isNotEmpty ? name[0].toUpperCase() + name.substring(1) : '';
   }
 

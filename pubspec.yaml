@@ -36,7 +36,10 @@ flutter:
 
  
   assets:
-    - assets/images/
+    - assets/images/image.png
+    - assets/images/kids_jump.png
+    - assets/images/logo_with_white.png
+    - assets/images/logo.png
 
   # fonts:
   #   - family: Schyler
