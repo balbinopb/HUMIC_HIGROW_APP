@@ -1,6 +1,10 @@
 # not fix yet
-lib/views/dashboard/
-lib/views/history/
+#lib/views/dashboard/
+#lib/views/history/
+
+# new
+.env
+logger_debugger.dart
 
 
 
