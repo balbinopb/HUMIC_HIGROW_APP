@@ -34,18 +34,12 @@ class CameraScreen extends GetView<CamController> {
               SizedBox(height: 20),
 
               // Show prediction result
-              Obx(
-                () =>
-                    controller.predictedHeight.value.isNotEmpty
-                        ? Text(
-                          'Height: ${controller.predictedHeight.value}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
-                        : SizedBox(),
-              ),
+              controller.predictedHeight.value.isNotEmpty
+                  ? Text(
+                    'Height: ${controller.predictedHeight.value}',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  )
+                  : SizedBox(),
 
               SizedBox(height: 16),
 

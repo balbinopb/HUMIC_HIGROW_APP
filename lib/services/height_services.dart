@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HeightServices {
-  final String baseUrl = 'http://10.110.0.9:3000/api/height';
+  final String baseUrl = 'http://172.20.10.2:3000/api/height';
 
   Future<String?> uploadAndPredict(File file) async {
     final prefs = await SharedPreferences.getInstance();
