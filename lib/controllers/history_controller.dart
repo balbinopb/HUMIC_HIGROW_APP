@@ -5,6 +5,7 @@ import 'package:higrow/services/height_services.dart';
 import 'package:intl/intl.dart';
 
 class HistoryController extends GetxController {
+  final isLoading = true.obs;
   final measurements = <HeightRecord>[].obs;
   final filteredMeasurements = <HeightRecord>[].obs;
   final searchController = TextEditingController();
@@ -18,6 +19,7 @@ class HistoryController extends GetxController {
   }
 
   void fetchMeasurements() async {
+    isLoading.value = true;
     try {
       final result = await _service.fetchRecords();
       measurements.assignAll(result);
@@ -25,6 +27,8 @@ class HistoryController extends GetxController {
     } catch (e) {
       // Get.snackbar("Error", "Failed to load measurements");
       return;
+    }finally{
+      isLoading.value = false;
     }
   }
 

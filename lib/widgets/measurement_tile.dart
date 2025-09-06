@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:higrow/constants/app_colors.dart';
+import 'package:higrow/controllers/profile_controller.dart';
 import 'package:higrow/models/height_record.dart';
 import 'package:intl/intl.dart';
 
 class MeasurementTile extends StatelessWidget {
+  final profileController = Get.find<ProfileController>();
   final HeightRecord measurement;
 
-  const MeasurementTile({super.key, required this.measurement});
+  MeasurementTile({super.key, required this.measurement});
 
   String formatDate(String rawDate) {
     try {
@@ -22,7 +25,7 @@ class MeasurementTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border.all(color: Colors.orange.shade200),
@@ -30,6 +33,7 @@ class MeasurementTile extends StatelessWidget {
       ),
       child: Row(
         children: [
+          // Profile / measurement image
           if (measurement.photoBase64 != null)
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -41,26 +45,33 @@ class MeasurementTile extends StatelessWidget {
               ),
             )
           else
-            Icon(Icons.image_not_supported, size: 64, color: AppColors.grey),
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                // ignore: deprecated_member_use
+                color: AppColors.grey.withOpacity(0.2),
+              ),
+              child: Icon(Icons.image_not_supported, color: AppColors.grey),
+            ),
 
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
 
+          // Name + date
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  measurement.height != null
-                      ? '${double.parse(measurement.height!).toStringAsFixed(2)} cm'
-                      : 'Unknown height',
+                  profileController.username,
                   style: GoogleFonts.inter(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
-
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   formatDate(measurement.createdAt),
                   style: GoogleFonts.inter(
@@ -69,6 +80,18 @@ class MeasurementTile extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+
+          // Height value aligned right
+          Text(
+            measurement.height != null
+                ? '${double.tryParse(measurement.height!)?.toStringAsFixed(2)} cm'
+                : '-',
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[600],
             ),
           ),
         ],

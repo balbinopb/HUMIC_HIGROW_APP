@@ -7,7 +7,7 @@ class AuthController extends GetxController {
   final AuthServices _authService = AuthServices();
 
   var isLoading = false.obs;
-  var isLoggedIn = false.obs;
+  // var isLoggedIn = false.obs;
   var isObscure = true.obs;
   var emailError = RxnString();
   var passwordError = RxnString();
@@ -18,7 +18,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    checkLoginStatus();
+    // checkLoginStatus();
     emailController.addListener(() => emailError.value = null);
     passwordController.addListener(() => passwordError.value = null);
   }
@@ -30,9 +30,9 @@ class AuthController extends GetxController {
         passwordController.text.trim().isEmpty ? 'Password is required' : null;
   }
 
-  void checkLoginStatus() async {
-    isLoggedIn.value = await _authService.isLoggedIn();
-  }
+  // void checkLoginStatus() async {
+  //   isLoggedIn.value = await _authService.isLoggedIn();
+  // }
 
   Future<void> login() async {
     final email = emailController.text.trim();
@@ -52,7 +52,7 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     if (success) {
-      isLoggedIn.value = true;
+      // isLoggedIn.value = true;
       Get.offAllNamed(AppRoutes.dashboard);
       clearFields();
     } else {
@@ -77,7 +77,7 @@ class AuthController extends GetxController {
     isLoading.value = false;
 
     if (success) {
-      isLoggedIn.value = true;
+      // isLoggedIn.value = true;
       Get.offAllNamed(AppRoutes.dashboard);
       clearFields();
     } else {
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     await _authService.logout();
-    isLoggedIn.value = false;
+    // isLoggedIn.value = false;
 
     await Future.delayed(Duration(milliseconds: 100));
     Get.offAllNamed(AppRoutes.login);
