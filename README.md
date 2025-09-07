@@ -1,4 +1,4 @@
-# higrow
+# HUMIC_HIGROW_APP
 
 A new Flutter project.
 
